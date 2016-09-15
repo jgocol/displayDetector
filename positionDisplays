@@ -1,0 +1,12 @@
+#!/bin/bash
+
+./displayDetector |
+while read line; do
+    sleep 1 # give some time to xwindow to detect that event first
+    if xrandr | grep -e "eDP1 connected" -e "HDMI1 disconnected" -e "VGA1 disconnected" > /dev/null; then
+        echo "Repositioned displays"
+        xrandr --output VGA1 --right-of HDMI1 --output eDP1 --right-of VGA1
+    else
+        echo "No match. Ignoring event"
+    fi
+done

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Triggers card0 change event in drm subsystem
+# Event should be visible in program ($ ./displayDetector monitor)
+
+sudo udevadm trigger --action change --sysname-match=card0 --subsystem-match="drm" --verbose
